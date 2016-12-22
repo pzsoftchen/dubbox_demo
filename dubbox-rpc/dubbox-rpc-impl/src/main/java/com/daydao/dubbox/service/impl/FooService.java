@@ -17,10 +17,20 @@ import org.springframework.stereotype.Service;
 public class FooService implements IFooService {
 
     private Logger LOGGER = LoggerFactory.getLogger(FooService.class);
-
+    private static int CALL_COUNT = 0;
     @Override
     public Foo getFoo(String fooName) {
+
         LOGGER.info("input params, fooName:{}", fooName);
+        ++ CALL_COUNT;
+        LOGGER.info("call fooName time: {}", CALL_COUNT);
+        if (CALL_COUNT == 1){ // 模拟超时的情形
+            try {
+                Thread.sleep(3*100);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
         return Foo.builder()
                 .fooName(fooName)
                 .build();

@@ -22,9 +22,9 @@ public class BooService implements IBooService {
     private static final Logger LOGGER = LoggerFactory.getLogger(BooService.class);
 
     @Autowired
-    private IFooService fooService;
+    private IFooService fooService; // 引用dubbo服务
     @Autowired
-    private ICooService cooService;
+    private ICooService cooService; // 引用本地服务
 
     @Override
     public void boo(String booName) {
