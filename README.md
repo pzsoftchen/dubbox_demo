@@ -180,7 +180,7 @@ PS： 通过以上服务的发布和订阅过程，可以看到只需要在配�
         4. actives，消费者端，最大并发调用限制，即当Consumer对一个服务的并发调用到上限后，新调用会Wait直到超时。
          在方法上配置（dubbo:method ）则并发限制针对方法，在接口上配置（dubbo:service）则并发限制针对服务。
     
-> dubbo的服务提供方要特别注意，调用处理的幂等操作，由于dubbo服务的调用通常受网络状况的影响较大，尤其在调用失败后（有可能是提供方未收到消费方的调用，也有可能提供方处理成功而消费方未收到提供方的返回等），都有可能会发起重调；这里要特别重复调用对于业务的影响
+> dubbo的服务提供方要特别注意，调用处理的**幂等**操作，由于dubbo服务的调用通常受网络状况的影响较大，尤其在调用失败后（有可能是提供方未收到消费方的调用，也有可能提供方处理成功而消费方未收到提供方的返回等），都有可能会发起重调；这里要特别重复调用对于业务的影响
     
 #### 配置上管理信息
 ```
@@ -194,7 +194,7 @@ PS： 通过以上服务的发布和订阅过程，可以看到只需要在配�
 ```xml
     <dubbo:application name="consumer-daydao-xx" owner="pz.chen" organization="daydao-xx"/>
 ```
-#### service配置负责人、分组
+#### service配置负责人
 ```xml
     <!--暴露服务-->
     <dubbo:service ref="fooService" interface="com.daydao.dubbox.service.IFooService" owner="pz.chen">
