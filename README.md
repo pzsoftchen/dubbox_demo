@@ -21,7 +21,7 @@ PS: 目前公司内部的私库上已是我编译过的最新版本`2.8.4`
 1. 编写dubbo服务的提供者
     dubbo服务的提供者其实和普通的spring服务一样
     定义接口：
-    ```
+    ```java
     public interface IFooService {
         Foo getFoo(String fooName);
         Foo getFoo(String fooName, String barName);
@@ -31,7 +31,7 @@ PS: 目前公司内部的私库上已是我编译过的最新版本`2.8.4`
     ```
     
     定义实现：
-    ```
+    ```java
     @Service
     public class FooService implements IFooService {
     
@@ -67,10 +67,10 @@ PS: 目前公司内部的私库上已是我编译过的最新版本`2.8.4`
         }
     }
     ```
-    **注：此处的Service注解采用依然是Spring的注解`**
+    **注：此处的Service注解采用依然是Spring的注解**
     
     对外暴露dubbo服务：
-    ```
+    ```xml
     <?xml version="1.0" encoding="UTF-8"?>
     <beans xmlns="http://www.springframework.org/schema/beans"
            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
