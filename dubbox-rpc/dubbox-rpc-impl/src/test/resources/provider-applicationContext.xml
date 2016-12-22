@@ -14,8 +14,8 @@
     <dubbo:protocol name="dubbo" port="20880"/>
 
     <!--暴露服务-->
-    <dubbo:service ref="fooService" interface="com.daydao.dubbox.service.IFooService" owner="pz.chen">
-        <dubbo:method name="getFoo" retry="3" timeout="100"/>
+    <dubbo:service ref="fooService" interface="com.daydao.dubbox.service.IFooService" owner="pz.chen" >
+        <dubbo:method name="getFoo" retries="3" timeout="100"/>
     </dubbo:service>
-    <bean id="fooService" class="com.daydao.dubbox.service.impl.FooService"/>
+
 </beans>
