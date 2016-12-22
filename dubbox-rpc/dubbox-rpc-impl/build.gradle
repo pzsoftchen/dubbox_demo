@@ -1,0 +1,4 @@
+dependencies {
+    // 接口依赖
+    compile project(':dubbox-rpc:dubbox-rpc-service')
+}

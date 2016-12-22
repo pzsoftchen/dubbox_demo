@@ -1,0 +1,3 @@
+dependencies {
+    compile project(':dubbox-rpc:dubbox-rpc-service')
+}

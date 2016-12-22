@@ -1,0 +1,7 @@
+dependencies {
+    compile project(':dubbox-rpc:dubbox-rpc-impl')
+    compile project(':dubbox-rpc:dubbox-rpc-service')
+    compile project(':dubbox-rpc:dubbox-rpc-consumer')
+
+    testCompile group: 'junit', name: 'junit', version: '4.11'
+}
