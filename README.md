@@ -221,4 +221,4 @@ PS： 通过以上服务的发布和订阅过程，可以看到只需要在配�
 
 [Demo应用简单运行指南](https://dangdangdotcom.github.io/dubbox/demo.html)
 
-[Dubbox Wiki](https://github.com/dangdangdotcom/dubbox/wiki) （由社区志愿者自由编辑的）
+[Dubbox Wiki](https://github.com/dangdangdotcom/dubbox/wiki)
