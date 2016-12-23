@@ -211,8 +211,14 @@ PS： 通过以上服务的发布和订阅过程，可以看到只需要在配�
   
 ### dubbox资料链接
 
-    [在Dubbo中开发REST风格的远程调用（RESTful Remoting）](https://dangdangdotcom.github.io/dubbox/rest.html)    
-    [在Dubbo中使用高效的Java序列化（Kryo和FST）](https://dangdangdotcom.github.io/dubbox/serialization.html)
-    [使用JavaConfig方式配置dubbox](https://dangdangdotcom.github.io/dubbox/java-config.html)
-    [Dubbo Jackson序列化使用说明](https://dangdangdotcom.github.io/dubbox/jackson.html)
-    [Demo应用简单运行指南](https://dangdangdotcom.github.io/dubbox/demo.html)
+[在Dubbo中开发REST风格的远程调用（RESTful Remoting）](https://dangdangdotcom.github.io/dubbox/rest.html)
+
+[在Dubbo中使用高效的Java序列化（Kryo和FST）](https://dangdangdotcom.github.io/dubbox/serialization.html)
+
+[使用JavaConfig方式配置dubbox](https://dangdangdotcom.github.io/dubbox/java-config.html)
+
+[Dubbo Jackson序列化使用说明](https://dangdangdotcom.github.io/dubbox/jackson.html)
+
+[Demo应用简单运行指南](https://dangdangdotcom.github.io/dubbox/demo.html)
+
+[Dubbox Wiki](https://github.com/dangdangdotcom/dubbox/wiki) （由社区志愿者自由编辑的）
