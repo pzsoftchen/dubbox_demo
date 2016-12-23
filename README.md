@@ -1,7 +1,9 @@
 ## dubbox_demo project
+---
 > dubbox 项目地址：https://github.com/dangdangdotcom/dubbox.git
 
 ### dubbox 源码编译
+---
 1. 从github上clone下来dubbox的源代码，然后编译： mvn clean install -Dmaven.test.skip
 2. 编译后如果要上传本地仓库则需要在pom.xml 添加distributionManagement属性配置对应的仓库地址(mvn clean install deploy -Dmaven.test.skip)
 3. 安装zookeeper，参见zookeeper的官网介绍
@@ -9,11 +11,13 @@
 PS: 目前公司内部的私库上已是我编译过的最新版本`2.8.4`
 
 ### 启动dubbo管理控制台dubbo-admin
+---
 1. 从第一步中编译出后的dubbo-admin子项目中找到dubbo-admin-2.8.4.war 放到tomcat服务器的webapps目录下
 2. 启动tomcat之前需要先启动zookeeper服务
 3. 启动tomcat服务，启动成功后访问：http://localhost:8080/dubbo-admin-2.8.4 (登录密码root/root)
 
 ### 编写dubbo服务
+---
 > 此处实例采用的是spring注解和dubbo配置结合的方式，这种使用方式也是本次推荐的使用方式，原因有两个：
     1. `dubbo`采用配置文件的方式，可以对当前的服务`无侵入透明使用`，并且兼容spring的注解(`Autowired`)，可以将dubbo服务当做本地服务一样使用
     2. `dubbo`的侧重点则更主要的是服务的`治理和拆分`，这块最主要的方式就是采用属性调节来实现,因此采用配置能够避免可能频繁的属性修改
@@ -156,6 +160,7 @@ PS: 目前公司内部的私库上已是我编译过的最新版本`2.8.4`
 PS： 通过以上服务的发布和订阅过程，可以看到只需要在配置文件中对dubbo服务就行声明就可以了，而在编码和实现的时候和我们现有的开发方式并无不同
 
 ### 关于dubbo使用过程中配置注意事项
+---
 #### dubbo的服务提供者或消费者均采用配置文件的方式进行配置
 ```
     官方推荐配置：
@@ -210,7 +215,7 @@ PS： 通过以上服务的发布和订阅过程，可以看到只需要在配�
   
   
 ### dubbox资料链接
-
+---
 [在Dubbo中开发REST风格的远程调用（RESTful Remoting）](https://dangdangdotcom.github.io/dubbox/rest.html)
 
 [在Dubbo中使用高效的Java序列化（Kryo和FST）](https://dangdangdotcom.github.io/dubbox/serialization.html)
