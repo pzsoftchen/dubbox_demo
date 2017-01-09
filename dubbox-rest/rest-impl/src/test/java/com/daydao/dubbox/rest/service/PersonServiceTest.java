@@ -39,7 +39,7 @@ public class PersonServiceTest {
         Person person = Person.builder()
                 .personId(10002L)
                 .personName("李四")
-                .sex("男")
+                .sex("女")
                 .age(22)
                 .build();
         System.out.println(HttpUtils.postJsonStr(url, JSON.toJSONString(person)));
