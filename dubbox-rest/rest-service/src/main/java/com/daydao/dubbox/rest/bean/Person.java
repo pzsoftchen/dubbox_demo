@@ -1,7 +1,9 @@
 package com.daydao.dubbox.rest.bean;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * Person
@@ -12,11 +14,13 @@ import lombok.Data;
  */
 @Data
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Person {
 
     private Long    personId    ;
     private String  personName  ;
     private String  sex         ;
-    private int     age         ;
+    private Integer age         ;
 
 }

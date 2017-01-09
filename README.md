@@ -212,6 +212,12 @@ PS： 通过以上服务的发布和订阅过程，可以看到只需要在配�
     <dubbo:reference id="fooService" interface="com.daydao.dubbox.service.IFooService" owner="pz.chen"/>
 ```
 
+### 以Rest方式提供Dubbo服务
+
+
+
+
+
   
   
 ### dubbox资料链接
