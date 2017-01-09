@@ -1,5 +1,7 @@
 package com.daydao.dubbox.rest.service;
 
+import com.alibaba.fastjson.JSON;
+import com.daydao.dubbox.rest.bean.Person;
 import org.junit.Test;
 
 /**
@@ -11,13 +13,16 @@ import org.junit.Test;
  */
 public class PersonServiceTest {
 
-
-
     @Test
     public void addPerson() throws Exception{
         String url = "http://localhost:8081/person/addPerson";
-        String jsonStr = "{\"personId\":10001,\"personName\":\"张三\",\"sex\":\"男\",\"age\":25}";
-        System.out.println(HttpUtils.postJsonStr(url, jsonStr));
+        Person person = Person.builder()
+                .personId(10001L)
+                .personName("张三")
+                .sex("男")
+                .age(25)
+                .build();
+        System.out.println(HttpUtils.postJsonStr(url, JSON.toJSONString(person)));
     }
 
     @Test
@@ -31,8 +36,13 @@ public class PersonServiceTest {
     @Test
     public void updatePerson() throws Exception{
         String url = "http://localhost:8081/person/updatePerson";
-        String jsonStr = "{\"personId\":10001,\"personName\":\"张三\",\"sex\":\"男\",\"age\":25}";
-        System.out.println(HttpUtils.postJsonStr(url, jsonStr));
+        Person person = Person.builder()
+                .personId(10002L)
+                .personName("李四")
+                .sex("男")
+                .age(22)
+                .build();
+        System.out.println(HttpUtils.postJsonStr(url, JSON.toJSONString(person)));
     }
 
     @Test
