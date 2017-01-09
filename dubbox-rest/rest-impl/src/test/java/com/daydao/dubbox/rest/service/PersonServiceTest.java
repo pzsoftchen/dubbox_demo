@@ -51,6 +51,4 @@ public class PersonServiceTest {
         System.out.println(HttpUtils.get(url1));
     }
 
-
-
 }

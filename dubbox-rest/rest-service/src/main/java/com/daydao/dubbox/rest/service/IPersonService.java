@@ -8,14 +8,10 @@ import com.daydao.dubbox.rest.resp.RetBean;
  */
 public interface IPersonService {
 
-
     RetBean addPerson(Person person);
-
     RetBean delPerson(Long personId);
     RetBean delPerson(Long corpId, Long personId);
-
     RetBean updatePerson(Person person);
-
     RetBean getPerson(Long personId);
 
 }

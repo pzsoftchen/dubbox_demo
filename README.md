@@ -213,13 +213,151 @@ PS： 通过以上服务的发布和订阅过程，可以看到只需要在配�
 ```
 
 ### 以Rest方式提供Dubbo服务
+> dubbox 在dubbo的基础上扩展了以Rest方式提供服务的能力,这里需要说明的是dubbox里的rest服务的实现方式采用的是标准的JAX-RS(JAVA REST API)而不是
+  这是一套比较成熟的解决方案，所有支持JavaEE6.0以上标准的服务器都对JAX-RS提供了支持。
 
 
+### 编写REST服务
+1. 编写REST服务的提供者(发布方)
+和普通的JAX服务类似
+接口定义：
+```java
+    public interface IPersonService {
+
+        RetBean addPerson(Person person);
+        RetBean delPerson(Long personId);
+        RetBean delPerson(Long corpId, Long personId);
+        RetBean updatePerson(Person person);
+        RetBean getPerson(Long personId);
+
+    }
+```
+接口实现：
+```java
+    @Service
+    @Path("person")
+    @Produces({ContentType.APPLICATION_JSON_UTF_8, ContentType.TEXT_XML_UTF_8})
+    public class PersonService implements IPersonService {
+
+        private static final Logger LOGGER = LoggerFactory.getLogger(PersonService.class);
+
+        @POST
+        @Path("addPerson")
+        @Consumes({ContentType.APPLICATION_JSON_UTF_8, ContentType.TEXT_XML_UTF_8})
+        @Override
+        public RetBean addPerson(Person person) {
+            LOGGER.info("called addPerson:{} ", JSON.toJSONString(person, true));
+            return RespUtils.createSuccRespData();
+        }
+
+        @GET
+        @Path("delPerson/{personId:\\d+}")
+        @Override
+        public RetBean delPerson(@PathParam("personId")Long personId) {
+            LOGGER.info("called delPerson:{}", personId);
+            return RespUtils.createErrorRespData("delete error");
+        }
 
 
+        @GET
+        @Path("delPerson/{corpId:\\d+}/{personId:\\d+}")
+        @Override
+        public RetBean delPerson(@PathParam("personId")Long corpId, @PathParam("personId")Long personId) {
+            LOGGER.info("called delPerson:{}", personId);
+            return RespUtils.createErrorRespDataWithCode(1001, "delete error");
+        }
 
-  
-  
+
+        @POST
+        @Path("updatePerson")
+        @Consumes({ContentType.APPLICATION_JSON_UTF_8, ContentType.TEXT_XML_UTF_8})
+        @Override
+        public RetBean updatePerson(Person person) {
+            LOGGER.info("called updatePerson:{} ", JSON.toJSONString(person, true));
+            return RespUtils.createSuccRespDataWithMsg("update successful!");
+        }
+
+
+        @GET
+        @Path("getPerson/{personId:\\d+}")
+        @Override
+        public RetBean getPerson(@PathParam("personId") Long personId) {
+
+            LOGGER.info("called getPerson:{}", personId);
+            return RespUtils.createRespData(Person.builder()
+                    .personId(personId)
+                    .personName("张三")
+                    .sex("男")
+                    .age(25).build());
+        }
+    }
+```
+服务发布Spring配置
+```xml
+    <?xml version="1.0" encoding="UTF-8"?>
+    <beans xmlns="http://www.springframework.org/schema/beans"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+           xmlns:context="http://www.springframework.org/schema/context"
+           xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+        <!--spring 注解扫描-->
+        <context:component-scan base-package="com.daydao.dubbox.rest"/>
+        <!-- 提供方应用信息，用于计算依赖关系 -->
+        <dubbo:application name="provider-daydao-rest"  owner="pz.chen" organization="daydao-rest" />
+        <!--使用zoo keeper作为服务注册中心-->
+        <dubbo:registry address="zookeeper://127.0.0.1:2181" check="false"/>
+        <!-- 用dubbo协议在20880端口暴露服务 -->
+        <dubbo:protocol name="rest" port="8081"/>
+        <!--暴露服务-->
+        <dubbo:service ref="personService" interface="com.daydao.dubbox.rest.service.IPersonService" owner="pz.chen"/>
+
+    </beans>
+```
+REST服务测试：
+```java
+    public class PersonServiceTest {
+
+        @Test
+        public void addPerson() throws Exception{
+            String url = "http://localhost:8081/person/addPerson";
+            Person person = Person.builder()
+                    .personId(10001L)
+                    .personName("张三")
+                    .sex("男")
+                    .age(25)
+                    .build();
+            System.out.println(HttpUtils.postJsonStr(url, JSON.toJSONString(person)));
+        }
+
+        @Test
+        public void delPerson() throws Exception{
+            String url1 = "http://localhost:8081/person/delPerson/10001";
+            String url2 = "http://localhost:8081/person/delPerson/26/10001";
+            System.out.println(HttpUtils.get(url1));
+            System.out.println(HttpUtils.get(url2));
+        }
+
+        @Test
+        public void updatePerson() throws Exception{
+            String url = "http://localhost:8081/person/updatePerson";
+            Person person = Person.builder()
+                    .personId(10002L)
+                    .personName("李四")
+                    .sex("女")
+                    .age(22)
+                    .build();
+            System.out.println(HttpUtils.postJsonStr(url, JSON.toJSONString(person)));
+        }
+
+        @Test
+        public void getPerson() throws Exception{
+            String url1 = "http://localhost:8081/person/getPerson/10001";
+            System.out.println(HttpUtils.get(url1));
+        }
+
+    }
+```
+
+
 ### dubbox资料链接
 ---
 [在Dubbo中开发REST风格的远程调用（RESTful Remoting）](https://dangdangdotcom.github.io/dubbox/rest.html)
@@ -233,3 +371,5 @@ PS： 通过以上服务的发布和订阅过程，可以看到只需要在配�
 [Demo应用简单运行指南](https://dangdangdotcom.github.io/dubbox/demo.html)
 
 [Dubbox Wiki](https://github.com/dangdangdotcom/dubbox/wiki)
+
+[JAX-RS](https://docs.oracle.com/javaee/7/tutorial/jaxrs-advanced007.htm#GKKNJ)
