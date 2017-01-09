@@ -1,5 +1,6 @@
 include 'dubbox-rpc:dubbox-rpc-service'
 include 'dubbox-rpc:dubbox-rpc-impl'
 include 'dubbox-rpc:dubbox-rpc-consumer'
-include 'dubbox-rest'
+include 'dubbox-rest:rest-service'
+include 'dubbox-rest:rest-impl'
 
