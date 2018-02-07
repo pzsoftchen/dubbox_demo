@@ -4,7 +4,8 @@ allprojects  {
     apply plugin: 'java'
     group = 'com.daydao'
     repositories {
-        maven { url "http://nexus.dayhr.com/nexus/content/groups/public/" }
+        mavenCentral()
+//        maven { url "http://nexus.dayhr.com/nexus/content/groups/public/" }
     }
 
     dependencies {
